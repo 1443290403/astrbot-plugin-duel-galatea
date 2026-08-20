@@ -193,7 +193,7 @@ class BanlistManager:
         headers = {"User-Agent": "Mozilla/5.0 ..."} # 简略
 
         try:
-            async with aiohttp.ClientSession(headers=headers) as session:
+            async with aiohttp.ClientSession(trust_env=True, headers=headers) as session:
                 # 1. 获取列表
                 list_url = f"https://gamekingapi.windoent.com/forbidden/forbbidengroup/webList?type={api_type}"
                 async with session.get(list_url) as resp:

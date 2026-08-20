@@ -238,7 +238,7 @@ class DeckBreakdownManager:
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
             }
 
-            async with aiohttp.ClientSession(headers=headers) as session:
+            async with aiohttp.ClientSession(trust_env=True, headers=headers) as session:
                 # 1. 抓取文字版主页 (为了获取 Sample Deck 的位置和 skill)
                 # URL 必须手动编码
                 page_url = f"https://{domain}/tier-list/deck-types/{urllib.parse.quote(deck_slug)}"

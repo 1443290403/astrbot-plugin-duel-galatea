@@ -82,7 +82,7 @@ class RotKManager:
         logger.info("[RotK] Clearing cache and downloading images...")
         self._clear_image_cache()
         local_paths = []
-        async with aiohttp.ClientSession(headers=self.headers) as session:
+        async with aiohttp.ClientSession(trust_env=True, headers=self.headers) as session:
             tasks = []
             for i, url in enumerate(url_list):
                 tasks.append(self._download_single_image(session, url, i))
@@ -162,7 +162,7 @@ class RotKManager:
 
     async def fetch_latest_report(self):
         logger.info(f"[RotK] Starting fetch from {self.base_url}")
-        async with aiohttp.ClientSession(headers=self.headers) as session:
+        async with aiohttp.ClientSession(trust_env=True, headers=self.headers) as session:
             content = await self._fetch_html(session, self.base_url)
             if not content:
                 return {"error": "Main page fetch failed"}
