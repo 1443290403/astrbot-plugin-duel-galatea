@@ -191,7 +191,7 @@ class GenericTierManager:
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
-        async with aiohttp.ClientSession(headers=headers) as session:
+        async with aiohttp.ClientSession(trust_env=True, headers=headers) as session:
             tasks = []
             for deck in targets:
                 # 注意：这里我们使用 self.get_chinese_name(session, ...)
@@ -538,7 +538,7 @@ class GenericTierManager:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
 
-        async with aiohttp.ClientSession(headers=headers) as session:
+        async with aiohttp.ClientSession(trust_env=True, headers=headers) as session:
             try:
                 # 1. 爬取 T 表基础数据
                 # 注意：这里需要传入 session，因为 _async_crawl_tier_data 我们之前改为接收 session 了

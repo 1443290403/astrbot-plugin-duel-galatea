@@ -69,7 +69,7 @@ class YugiohCardSearcher:
     def __init__(self):
         self.base_url = "https://ygocdb.com/api/v0"
         # 优化资源管理：复用 Session
-        self.session = aiohttp.ClientSession(headers={"User-Agent": "Mozilla/5.0"})
+        self.session = aiohttp.ClientSession(trust_env=True, headers={"User-Agent": "Mozilla/5.0"})
 
     async def close(self):
         """关闭 Session"""

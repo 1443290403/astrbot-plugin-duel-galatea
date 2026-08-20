@@ -270,7 +270,7 @@ class YDKManager:
         images_cache = {} # 格式: { "card_id": ImageObject }
         unique_ids = set(main + extra + side)
         
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(trust_env=True) as session:
             tasks = []
             id_list = list(unique_ids)
             for cid in id_list:
@@ -442,7 +442,7 @@ class YDKManager:
         images_cache = {}
         unique_ids = list(set(card_ids))
         
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(trust_env=True) as session:
             tasks = [self._download_image(session, cid) for cid in unique_ids]
             results = await asyncio.gather(*tasks)
             for cid, img in zip(unique_ids, results):
